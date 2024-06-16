@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Envio de Datos "SERVER"</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>AGUACRISTAL</h1>
+    <button id="startButton">Generar Datos</button>
+    <button id="stopButton">Stop</button>
+    <p>Envios realizados: <span id="sendCount">0</span></p>
+    <p>Datos actuales:</p>
+    <ul>
+        <li>Latitud: <span id="latitude">0</span></li>
+        <li>Longitud: <span id="longitude">0</span></li>
+        <li>Fecha: <span id="date">N/A</span></li>
+        <li>ID Cliente: <span id="customer_id">0</span></li>
+        <li>ID Empleado: <span id="employee_id">0</span></li>
+        <li>Cantidad de Productos: <span id="quantity_products">0</span></li>
+        <li>ID Pedido: <span id="order_id">N/A</span></li>
+    </ul>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#startButton').click(function() {
+                $.post('/start', function(data) {
+                    console.log(data);
+                });
+            });
+
+            $('#stopButton').click(function() {
+                $.post('/stop', function(data) {
+                    console.log(data);
+                });
+            });
+
+            function updateStatus() {
+                $.get('/status', function(data) {
+                    $('#sendCount').text(data.send_count);
+                    if (data.data) {
+                        $('#latitude').text(data.data.latitude);
+                        $('#longitude').text(data.data.longitude);
+                        $('#date').text(data.data.Date);
+                        $('#customer_id').text(data.data.customer_id);
+                        $('#employee_id').text(data.data.employee_id);
+                        $('#quantity_products').text(data.data.quantity_products);
+                        $('#order_id').text(data.data.order_id);
+                    }
+                });
+            }
+
+            setInterval(updateStatus, 1000);
+        });
+    </script>
+</body>
+</html>

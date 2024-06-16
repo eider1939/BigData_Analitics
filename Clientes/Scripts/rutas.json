@@ -1,0 +1,6 @@
+{
+    "path_medellin":"./DB/50001.parquet",
+    "path_customers":"./DB/customers.parquet",
+    "path_employees":"./DB/employees.parquet"
+}
+
