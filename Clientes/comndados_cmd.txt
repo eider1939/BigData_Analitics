@@ -1,0 +1,13 @@
+## Ver los paquetes instalados en el entorno virtual
+pip list --not-required
+# Generar el archivo requirements.txt
+pip list --not-required --format=freeze > requirements.txt
+
+## Crear la imagende de docker # el punto es para crear el docker en el directorio actual
+docker build -t cliente_bigdata .
+
+# Ejecutar el script Flask en el contenedor
+docker run -d -p 5000:5000 --name contenedor_cliente cliente_bigdata python App_cliente.py
+
+#parar la ejecuciond ela imagen de decker
+docker stop contenedor_cliente
