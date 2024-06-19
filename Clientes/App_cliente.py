@@ -11,8 +11,8 @@ app = Flask(__name__)
 sending_data = False
 send_count = 0
 current_data = {}
-remote_server_url = 'http://localhost:5002/endpoint'  # URL del servidor remoto
-
+#remote_server_url = 'http://localhost:5002/endpoint'  # URL del servidor remoto
+remote_server_url ='http://localhost:5002/endpoint'
 # Ruta al archivo .json que contiene las rutas
 def file_json_send():
     path_json_rutas = 'Scripts/rutas.json'

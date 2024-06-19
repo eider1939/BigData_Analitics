@@ -4,13 +4,15 @@ pip list --not-required
 pip list --not-required --format=freeze > requirements.txt
 
 ## Crear la imagende de docker # el punto es para crear el docker en el directorio actual
-docker build -t cliente_bigdata .
+docker build -t server_bigdata .
 
 # Ejecutar el script Flask en el contenedor
-docker run -d -p 5000:5000 --name contenedor_cliente cliente_bigdata python App_cliente.py
+docker run -d -p 5002:5002 --name contenedor_server server_bigdata python app_server.py
 
 #parar la ejecuciond ela imagen de decker
-docker stop contenedor_cliente
+docker stop contenedor_server
 
+# crear red 
+docker network create mynetwork
 
-docker run -d -p 5000:5000 --network=mynetwork --name contenedor_cliente cliente_bigdata python App_cliente.py
+docker run -d -p 5002:5002 --network=mynetwork --name contenedor_server server_bigdata python app_server.py
